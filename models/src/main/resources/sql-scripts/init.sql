@@ -1,0 +1,1 @@
+INSERT INTO _user (username, email, password, name, surname, address, post_code, account_balance, created_at, last_login) VALUES ('ariana', 'ariana@student.uni-lj.si', 'ariana1999', 'Ariana', 'Kržan', 'Večna pot 113', '1000 Ljubljana', 50.00, TIMESTAMP '2023-01-01 10:00:00', TIMESTAMP '2023-01-01 10:00:00');
