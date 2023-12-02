@@ -1,4 +1,4 @@
-package si.fri.rso.simplsrecka.lotteryticketcatalog.api.v1.resources;
+package si.fri.rso.simplsrecka.user.api.v1.resources;
 
 import si.fri.rso.simplsrecka.user.services.config.RestProperties;
 

@@ -9,9 +9,12 @@ kumuluzee:
       port: 8080
   datasources:
     - jndi-name: jdbc/UserDS
-      connection-url: jdbc:postgresql://localhost:5432/lottery-ticket
-      username: dbuser
-      password: postgres
+      #connection-url: jdbc:postgresql://localhost:5432/lottery-ticket
+      connection-url: jdbc:postgresql://sqlsimplsrecka.postgres.database.azure.com:5432/lottery-ticket
+      username: lukaariana
+      password: XonaryLu99
+      #username: dbuser
+      #password: postgres
   health:
     checks:
       data-source-health-check:

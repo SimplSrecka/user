@@ -1,4 +1,4 @@
-package si.fri.rso.simplsrecka.lotteryticketcatalog.api.v1.health;
+package si.fri.rso.simplsrecka.user.api.v1.health;
 
 import org.eclipse.microprofile.health.HealthCheck;
 import org.eclipse.microprofile.health.HealthCheckResponse;
