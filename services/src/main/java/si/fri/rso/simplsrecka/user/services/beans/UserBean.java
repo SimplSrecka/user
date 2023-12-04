@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import com.kumuluz.ee.rest.beans.QueryParameters;
 import com.kumuluz.ee.rest.utils.JPAUtils;
 
+import org.eclipse.microprofile.metrics.annotation.Gauge;
 import org.eclipse.microprofile.metrics.annotation.Timed;
 
 import si.fri.rso.simplsrecka.user.lib.User;
@@ -34,7 +35,7 @@ public class UserBean {
         return resultList.stream().map(UserConverter::toDto).collect(Collectors.toList());
     }
 
-    @Timed
+    @Timed(name = "get_users_filter")
     public List<User> getUsersFilter(UriInfo uriInfo) {
         QueryParameters queryParameters = QueryParameters.query(uriInfo.getRequestUri().getQuery()).defaultOffset(0).build();
         return JPAUtils.queryEntities(em, UserEntity.class, queryParameters).stream()
@@ -49,6 +50,7 @@ public class UserBean {
         return UserConverter.toDto(userEntity);
     }
 
+    @Gauge(name = "create_user", unit = "MetricUnits.NONE")
     public User createUser(User user) {
         UserEntity userEntity = UserConverter.toEntity(user);
         try {
