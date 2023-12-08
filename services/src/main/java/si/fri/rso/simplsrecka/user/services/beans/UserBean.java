@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 import com.kumuluz.ee.rest.beans.QueryParameters;
 import com.kumuluz.ee.rest.utils.JPAUtils;
 
-import org.eclipse.microprofile.metrics.annotation.Gauge;
+import org.eclipse.microprofile.metrics.annotation.Metered;
 import org.eclipse.microprofile.metrics.annotation.Timed;
 
 import si.fri.rso.simplsrecka.user.lib.User;
@@ -29,13 +29,8 @@ public class UserBean {
     @Inject
     private EntityManager em;
 
-    public List<User> getUsers() {
-        TypedQuery<UserEntity> query = em.createNamedQuery("UserEntity.getAll", UserEntity.class);
-        List<UserEntity> resultList = query.getResultList();
-        return resultList.stream().map(UserConverter::toDto).collect(Collectors.toList());
-    }
 
-    @Timed(name = "get_users_filter")
+    @Timed(name = "get_all_users")
     public List<User> getUsersFilter(UriInfo uriInfo) {
         QueryParameters queryParameters = QueryParameters.query(uriInfo.getRequestUri().getQuery()).defaultOffset(0).build();
         return JPAUtils.queryEntities(em, UserEntity.class, queryParameters).stream()
@@ -50,7 +45,22 @@ public class UserBean {
         return UserConverter.toDto(userEntity);
     }
 
-    @Gauge(name = "create_user", unit = "MetricUnits.NONE")
+    public Integer login(String username, String password) {
+        TypedQuery<UserEntity> query = em.createQuery(
+                "SELECT u FROM UserEntity u WHERE u.username = :username AND u.password = :password",
+                UserEntity.class);
+        query.setParameter("username", username);
+        query.setParameter("password", password);
+        List<UserEntity> users = query.getResultList();
+
+        if (!users.isEmpty()) {
+            return users.get(0).getId();
+        } else {
+            throw new NotFoundException("Invalid username or password.");
+        }
+    }
+
+    @Metered(name = "create_user")
     public User createUser(User user) {
         UserEntity userEntity = UserConverter.toEntity(user);
         try {

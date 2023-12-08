@@ -13,11 +13,7 @@ public class UserConverter {
         dto.setPassword(entity.getPassword());
         dto.setName(entity.getName());
         dto.setSurname(entity.getSurname());
-        dto.setAddress(entity.getAddress());
-        dto.setPostCode(entity.getPostCode());
         dto.setAccountBalance(entity.getAccountBalance());
-        dto.setCreatedAt(entity.getCreatedAt());
-        dto.setLastLogin(entity.getLastLogin());
 
         return dto;
     }
@@ -29,11 +25,7 @@ public class UserConverter {
         entity.setPassword(dto.getPassword());
         entity.setName(dto.getName());
         entity.setSurname(dto.getSurname());
-        entity.setAddress(dto.getAddress());
-        entity.setPostCode(dto.getPostCode());
         entity.setAccountBalance(dto.getAccountBalance());
-        entity.setCreatedAt(dto.getCreatedAt());
-        entity.setLastLogin(dto.getLastLogin());
 
         return entity;
     }

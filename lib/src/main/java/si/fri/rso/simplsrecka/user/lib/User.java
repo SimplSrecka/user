@@ -11,11 +11,7 @@ public class User {
     private String password;
     private String name;
     private String surname;
-    private String address;
-    private String postCode;
     private BigDecimal accountBalance;
-    private Instant createdAt;
-    private Instant lastLogin;
 
 
     public Integer getUserId() {
@@ -66,22 +62,6 @@ public class User {
         this.surname = surname;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPostCode() {
-        return postCode;
-    }
-
-    public void setPostCode(String postCode) {
-        this.postCode = postCode;
-    }
-
     public BigDecimal getAccountBalance() {
         return accountBalance;
     }
@@ -90,19 +70,4 @@ public class User {
         this.accountBalance = accountBalance;
     }
 
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Instant getLastLogin() {
-        return lastLogin;
-    }
-
-    public void setLastLogin(Instant lastLogin) {
-        this.lastLogin = lastLogin;
-    }
 }
