@@ -4,7 +4,8 @@ kumuluzee:
     name: dev
   version: 1.0.0
   server:
-    base-url: http://localhost:8080
+    #base-url: http://localhost:8080
+    base-url: http://20.246.199.143:8080
     http:
       port: 8080
   datasources:
@@ -24,7 +25,8 @@ kumuluzee:
       - user-lib
   openapi-mp:
     ui:
-      specification-server: http://localhost:8080
+      #specification-server: http://localhost:8080
+      specification-server: http://20.246.199.143:8080
     swagger-ui:
       path: /api-specs/ui
   health:
