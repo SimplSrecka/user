@@ -25,6 +25,11 @@ spec:
                 secretKeyRef:
                   name: lottery-ticket-secret
                   key: password
+            - name: X_RAPID_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: email-verifier-secret
+                  key: api-key
           ports:
             - containerPort: 8080
               name: server
