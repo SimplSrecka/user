@@ -1,5 +1,6 @@
 package si.fri.rso.simplsrecka.user.api.v1.resources;
 
+import com.kumuluz.ee.cors.annotations.CrossOrigin;
 import com.kumuluz.ee.logs.cdi.Log;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
@@ -14,6 +15,7 @@ import org.eclipse.microprofile.openapi.annotations.servers.Server;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import si.fri.rso.simplsrecka.user.lib.User;
 import si.fri.rso.simplsrecka.user.services.beans.UserBean;
+import si.fri.rso.simplsrecka.user.services.externalAPI.EmailValidatorService;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -32,12 +34,16 @@ import java.util.logging.Logger;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Tag(name = "Users", description = "APIs for user operations")
+@CrossOrigin(allowOrigin = "http://localhost:4200")
 public class UserResource {
 
     private Logger log = Logger.getLogger(UserResource.class.getName());
 
     @Inject
     private UserBean userBean;
+
+    @Inject
+    private EmailValidatorService emailValidatorService;
 
     @Context
     protected UriInfo uriInfo;
@@ -136,8 +142,16 @@ public class UserResource {
             required = true,
             content = @Content(schema = @Schema(implementation = User.class)))
                                    User user) {
-        if (user == null || user.getUsername() == null || user.getEmail() == null) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
+        if (user == null ||
+                user.getUsername() == null || user.getUsername().trim().isEmpty() ||
+                user.getEmail() == null || user.getEmail().trim().isEmpty() ||
+                user.getName() == null || user.getName().trim().isEmpty() ||
+                user.getSurname() == null || user.getSurname().trim().isEmpty() ||
+                user.getPassword() == null || user.getPassword().trim().isEmpty()) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Missing or empty required fields").build();
+        }
+        if (!emailValidatorService.isValidEmail(user.getEmail())) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Invalid email address").build();
         }
         try {
             user = userBean.createUser(user);

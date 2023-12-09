@@ -11,7 +11,7 @@ public class User {
     private String password;
     private String name;
     private String surname;
-    private BigDecimal accountBalance;
+    private BigDecimal accountBalance = new BigDecimal("50.00");;
 
 
     public Integer getUserId() {

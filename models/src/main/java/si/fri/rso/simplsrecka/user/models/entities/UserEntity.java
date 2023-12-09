@@ -31,8 +31,8 @@ public class UserEntity {
     @Column(name = "surname", nullable = false)
     private String surname;
 
-    @Column(name = "account_balance")
-    private BigDecimal accountBalance = BigDecimal.valueOf(50);
+    @Column(name = "account_balance", nullable = false)
+    private BigDecimal accountBalance;
 
 
     public Integer getId() {
