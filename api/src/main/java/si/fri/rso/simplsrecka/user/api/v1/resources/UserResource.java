@@ -34,7 +34,7 @@ import java.util.logging.Logger;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Tag(name = "Users", description = "APIs for user operations")
-@CrossOrigin(supportedMethods = "GET, POST, PUT, DELETE, HEAD, OPTIONS", allowOrigin = "http://localhost:4200")
+@CrossOrigin(supportedMethods = "GET, POST, PUT, DELETE, HEAD, OPTIONS", allowOrigin = "*")
 public class UserResource {
 
     private Logger log = Logger.getLogger(UserResource.class.getName());
