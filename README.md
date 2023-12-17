@@ -1,4 +1,4 @@
-# SimplSrecka
+# SimplSreckaa
 
 ## Mikrostoritev: User
 
