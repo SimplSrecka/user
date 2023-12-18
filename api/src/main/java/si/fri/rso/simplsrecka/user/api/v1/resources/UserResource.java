@@ -11,11 +11,12 @@ import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
-import org.eclipse.microprofile.openapi.annotations.servers.Server;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import si.fri.rso.simplsrecka.user.lib.LoginResponse;
 import si.fri.rso.simplsrecka.user.lib.User;
 import si.fri.rso.simplsrecka.user.services.beans.UserBean;
 import si.fri.rso.simplsrecka.user.services.externalAPI.EmailValidatorService;
+import si.fri.rso.simplsrecka.user.services.externalAPI.EmailOTPService;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -27,6 +28,8 @@ import javax.ws.rs.core.UriInfo;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpServletRequest;
+
 
 @Log
 @ApplicationScoped
@@ -44,6 +47,9 @@ public class UserResource {
 
     @Inject
     private EmailValidatorService emailValidatorService;
+
+    @Inject
+    private EmailOTPService emailOTPService;
 
     @Context
     protected UriInfo uriInfo;
@@ -118,7 +124,9 @@ public class UserResource {
         }
         try {
             Integer authenticatedUser = userBean.login(user.getUsername(), user.getPassword());
-            return Response.status(Response.Status.OK).entity(authenticatedUser).build();
+            String userEmail = userBean.getUser(authenticatedUser).getEmail();
+            String otp = emailOTPService.getOTP(userEmail);
+            return Response.status(Response.Status.OK).entity(new LoginResponse(authenticatedUser, otp)).build();
         } catch (NotFoundException e) {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         } catch (Exception e) {
@@ -126,6 +134,7 @@ public class UserResource {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
     }
+
 
     @Operation(description = "Add a new user.", summary = "Create user")
     @APIResponses({

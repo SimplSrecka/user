@@ -1,1 +1,2 @@
 INSERT INTO _user (username, email, password, name, surname, account_balance) VALUES ('ariana', 'ariana@student.uni-lj.si', 'ariana1999', 'Ariana', 'Kržan', 50.00);
+INSERT INTO _user (username, email, password, name, surname, account_balance) VALUES ('luka', 'lb4684@student.uni-lj.si', 'luka1999', 'Luka', 'Brecelj', 50.00);

@@ -25,10 +25,15 @@ spec:
                 secretKeyRef:
                   name: lottery-ticket-secret
                   key: password
-            - name: X_RAPID_API_KEY
+            - name: EMAIL_VERIFIER_API_KEY
               valueFrom:
                 secretKeyRef:
                   name: email-verifier-secret
+                  key: api-key
+            - name: EMAIL_OTP_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: email-otp-secret
                   key: api-key
           ports:
             - containerPort: 8080
@@ -53,7 +58,7 @@ kind: Service
 metadata:
   name: user
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
     - port: 8080
       protocol: TCP
