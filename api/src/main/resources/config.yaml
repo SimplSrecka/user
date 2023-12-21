@@ -14,6 +14,7 @@ kumuluzee:
       connection-url: jdbc:postgresql://sqlsimplsrecka.postgres.database.azure.com:5432/lottery-ticket
       username: lukaariana
       password: ${{ secrets.AZURE_CREDENTIALS }}
+      #password: XonaryLu99
       #username: dbuser
       #password: postgres
       pool:
@@ -37,10 +38,10 @@ kumuluzee:
       disk-space-health-check:
         threshold: 100000000
         type: liveness
-  metrics:
-    web-instrumentation:
-      - name: tickets-endpoint
-        url-pattern: /v1/tickets/*
+#  metrics:
+#    web-instrumentation:
+#      - name: tickets-endpoint
+#        url-pattern: /v1/tickets/*
   logs:
     config-file: '<?xml version="1.0" encoding="UTF-8"?>
                             <Configuration name="SimplSrecka">
