@@ -4,8 +4,8 @@ kumuluzee:
     name: dev
   version: 1.0.0
   server:
-    #ase-url: http://localhost:8080
-    base-url: http://20.124.175.39:8080
+    ase-url: http://localhost:8080
+    #base-url: http://20.124.175.39:8080
     http:
       port: 8080
   datasources:
@@ -27,9 +27,7 @@ kumuluzee:
   openapi-mp:
     ui:
       #specification-server: http://localhost:8080
-      specification-server: http://20.124.175.39:8080
-    swagger-ui:
-      path: /user/api-specs/ui
+      specification-server: http://52.226.192.46/user
   health:
     checks:
       data-source-health-check:
