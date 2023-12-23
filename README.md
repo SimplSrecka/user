@@ -13,6 +13,9 @@
 * Urejanje svojega poštnega naslova
 * Ogled svojih zadetkov
 
+### API Swagger: 
+* http://52.226.192.46/user/api-specs/ui/?url=http://52.226.192.46/user/openapi&oauth2RedirectUrl=http://52.226.192.46/user/api-specs/ui/oauth2-redirect.html
+
 
 
 ## Zagon in Testiranje
