@@ -125,7 +125,8 @@ public class UserResource {
         try {
             Integer authenticatedUser = userBean.login(user.getUsername(), user.getPassword());
             String userEmail = userBean.getUser(authenticatedUser).getEmail();
-            String otp = emailOTPService.getOTP(userEmail);
+            //String otp = emailOTPService.getOTP(userEmail);
+            String otp = emailOTPService.sendMailWithCode(userEmail);
             return Response.status(Response.Status.OK).entity(new LoginResponse(authenticatedUser, otp)).build();
         } catch (NotFoundException e) {
             return Response.status(Response.Status.UNAUTHORIZED).build();
